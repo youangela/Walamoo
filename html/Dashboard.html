@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/Walamoo/css/dashstyle.css">
+		
+		<style>
+			
+			
+			.elements{
+			font-size: 30px;
+			text-align: center;
+			}
+			.elements1{
+			font-size: 30px;
+			text-align: center;
+			}
+			.elements2{
+			font-size: 30px;
+			text-align: center;
+			}
+			.sumelements{
+				font-size: 30px;
+				text-align: center;
+			}
+			.uniqueTaxpayer{
+				position: relative;
+				top: 50%;
+			}
+			.records{
+				position:absolute;
+				height: 240px;
+				width: 240px;
+				border: 1px solid;
+				
+			}
+			.countries{
+				position:absolute;
+				height: 240px;
+				width: 240px;
+				border: 1px solid;
+				left: 240px;
+				
+			}
+
+			.cities{
+				position:absolute;
+				height: 240px;
+				width: 240px;
+				border: 1px solid;
+				left: 480px;
+				}
+				
+			.taxes{
+				position:absolute;
+				height: 240px;
+				width: 240px;
+				border: 1px solid;
+				left: 720px;
+			}
+			table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+		</style>
+	</head>
+	<body>	
+		<div class="container">
+			<div class="navbar">
+				<img class="image" src="/Walamoo/images/WalaLogo.png" alt="Logo">
+				<div class="options">
+				
+					<a class="button" href="Dashboard.html">Dashboard</a>
+					<div class="query">
+						<a class="querybut" href="Login.html">Query</a>
+						<div class="querylist">
+							<a href="Guided.html">Guided</a>
+							<a href="Ad_hoc.html">Ad-hoc</a>
+						</div>
+					</div>
+					
+					<a class="button" href="#scenario">Monthly Scenario</a>
+					<a class="button" href="XML.html">XML</a>
+				</div>
+				<div class="menudrop">
+					<button class="account"><img src="/Walamoo/images/account1.png" alt="Account" style="width:70px;height:70px;"></button>
+					<div class="menu">
+						<a href="paynow.html">Pay Now</a>
+						<a href="#">Bank Statement</a>
+						<a href="Login.html">Log out</a>
+						
+					</div>
+					
+				</div>
+				
+				<button type="submit" class="settings" onclick="opensettings()"><img src="/Walamoo/images/settings.png" alt="Settings" style="width:53px;height:53px;"></button>
+				
+			</div>
+			<div class="dash">
+				<h1 class="heading">Dashboard</h1>
+				<div class="dashcontainer">
+					<div class="records">
+						<div id="uniqueTaxpayer">
+							<h3>Records &#8659; </h3>
+						</div>
+					</div>
+					<div class="countries">
+						<div id="uniqueCountry">
+							<h3>Countries of Origin &#8659;</h3>
+						</div>
+					</div>
+					<div class="cities">
+						<div id="uniqueCity">					
+							<h3>Cities of Origin &#8659;</h3>
+						</div>							
+					</div>
+					<div class="taxes">
+						<div id="totalSum">
+							
+								<h3> Total Taxes Paid &#8659;</h3>
+						
+						</div>
+					</div>
+				</div>
+				<div class="buttons">
+					<button type="submit" class="userlogs" onclick="openlogs()"><strong>User Logs</strong></button>
+					<button type="submit" class="citylist" onclick="opencities()"><strong>City List</strong></button>
+				</div>
+				<div class="citypopup" id="citypopup">
+					<div class="title">
+						<h2>City List</h2>
+						<button class="x" onclick="closecities()"><img src="/Walamoo/images/x.png" alt="x" style="width:21px;height:21px;"></button>
+					</div>
+					<div class="list" id="countryCities">
+						
+					</div>
+				</div>
+				<div class="userpopup" id="userpopup">
+					<div class="title">
+						<h2>User Logs</h2>
+						<button class="x" onclick="closelogs()"><img src="/Walamoo/images/x.png" alt="x" style="width:21px;height:21px;"></button>
+					</div>
+					<div class="list"></div>
+				</div>
+				<div class="settingspopup" id="settingspopup">
+					<div class="title">
+						<h2>Settings</h2>
+						<button class="x" onclick="closesettings()"><img src="/Walamoo/images/x.png" alt="x" style="width:21px;height:21px;"></button>
+					</div>
+					<div class="list"> 
+					<form action="/Walamoo/php/upload.php" method="post" enctype="multipart/form-data">
+						Select file to upload:
+						<input type="file" name="fileToUpload" id="fileToUpload">
+						<input type="submit" value="Upload File" name="submit">
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			let popupcity = document.getElementById("citypopup");
+			let popuplogs = document.getElementById("userpopup");
+			let popupsettings = document.getElementById("settingspopup");
+			
+			function opencities(){
+				popupcity.classList.add("open_cities");
+			}
+			function closecities(){
+				popupcity.classList.remove("open_cities");
+			}
+			function openlogs(){
+				popuplogs.classList.add("open_logs");
+			}
+			function closelogs(){
+				popuplogs.classList.remove("open_logs");
+			}
+			function opensettings(){
+				popupsettings.classList.add("open_settings");
+			}
+			function closesettings(){
+				popupsettings.classList.remove("open_settings");
+			}
+			
+			async function loadXML() {
+            try {
+                const response = await fetch('/Walamoo/uploads/currentxml.xml'); // Replace with the actual path to your XML file
+                const xmlString = await response.text();
+
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+				const cities = xmlDoc.querySelectorAll('taxpayer');
+				
+				const countryCitiesMap = new Map();
+
+                const uniqueCounts = {};
+				const uniqueTaxpayer = {};
+				const uniqueCountry = {};
+				const uniqueCity = {};
+                let totalSum = 0;
+				const countryCounts = {};
+				
+
+                
+				const taxpayerTag = ['taxpayer'];
+				const countryTag = ['country'];
+				const cityTag = ['city'];
+				const taxTags = ['tax'];
+				
+				 cities.forEach(city => {
+					const cityName = city.querySelector('city').textContent;
+					const countryName = city.querySelector('country').textContent;
+
+					if (!countryCitiesMap.has(countryName)) {
+						countryCitiesMap.set(countryName, new Set());
+					}
+					countryCitiesMap.get(countryName).add(cityName);
+				});
+            
+				taxpayerTag.forEach(tagName1 => {
+                    const tags1 = xmlDoc.querySelectorAll(tagName1);
+                    uniqueTaxpayer[tagName1] = new Set();
+
+                    tags1.forEach(tag1 => {
+                        const tagValue1 = parseFloat(tag1.textContent.trim());
+                        if (!isNaN(tagValue1)) {
+                            totalSum += tagValue1;
+                        }
+                        uniqueTaxpayer[tagName1].add(tag1.textContent.trim());
+                    });
+                });
+				
+				countryTag.forEach(tagName => {
+                    const tags = xmlDoc.querySelectorAll(tagName);
+                    uniqueCountry[tagName] = new Set();
+
+                    tags.forEach(tag => {
+                        const tagValue = parseFloat(tag.textContent.trim());
+                        if (!isNaN(tagValue)) {
+                            totalSum += tagValue;
+                        }
+                        uniqueCountry[tagName].add(tag.textContent.trim());
+                    });
+                });
+				cityTag.forEach(tagName => {
+                    const tags = xmlDoc.querySelectorAll(tagName);
+                    uniqueCity[tagName] = new Set();
+
+                    tags.forEach(tag => {
+                        const tagValue = parseFloat(tag.textContent.trim());
+                        if (!isNaN(tagValue)) {
+                            totalSum += tagValue;
+                        }
+                        uniqueCity[tagName].add(tag.textContent.trim());
+                    });
+                });
+				taxTags.forEach(tagName => {
+                    const tags = xmlDoc.querySelectorAll(tagName);
+                    uniqueCounts[tagName] = new Set();
+
+                    tags.forEach(tag => {
+                        const tagValue = parseFloat(tag.textContent.trim());
+                        if (!isNaN(tagValue)) {
+                            totalSum += tagValue;
+                        }
+                        uniqueCounts[tagName].add(tag.textContent.trim());
+                    });
+                });
+				
+                // Display unique counts
+                const countElement = document.getElementById('uniqueTaxpayer');
+				countElement.className = "elements";
+                taxpayerTag.forEach(tagName1 => {
+                    const count1 = uniqueTaxpayer[tagName1].size;
+                    countElement.innerHTML += `<p> ${count1}</p>`;
+                });
+				 const countElement1 = document.getElementById('uniqueCountry');
+				 countElement1.className = "elements1";
+                countryTag.forEach(tagName => {
+                    const count2 = uniqueCountry[tagName].size;
+                    countElement1.innerHTML += `<p> ${count2}</p>`;
+                });
+				 const countElement2 = document.getElementById('uniqueCity');
+				 countElement2.className = "elements2";
+                cityTag.forEach(tagName => {
+                    const count3 = uniqueCity[tagName].size;
+                    countElement2.innerHTML += `<p> ${count3}</p>`;
+                });
+				
+				
+                // Display total sum
+                const sumElement = document.getElementById('totalSum');
+				sumElement.className = "sumelements";
+                sumElement.innerHTML += `<p> ${totalSum}</p>`;
+            
+				const countryCitiesDiv = document.getElementById('countryCities');
+				countryCitiesDiv.innerHTML = '<h2>Country-City Associations:</h2>';
+				countryCitiesMap.forEach((citiesSet, countryName) => {
+					const cityCount = citiesSet.size;
+					countryCitiesDiv.innerHTML += `<p>${countryName}: ${cityCount}</p>`;
+				});
+			
+			
+			} catch (error) {
+                console.error('Error loading XML:', error);
+            }
+        }
+
+        loadXML();
+		</script>
+	</body>
+</html>

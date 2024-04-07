@@ -1,0 +1,361 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	
+}
+.container{
+	width: 100%;
+	height: 100vh;
+	background-color: #D0E5EC;
+	display: flex;
+	justify-content: center;
+	
+	
+}
+.navbar{
+	background-color: #fff;
+	overflow: visible;
+	width: 1467px;
+	height: 100px;
+	border-radius: 10px;
+	margin-top: 30px;
+	display: flex;
+	position: relative;
+}
+.dash{
+	background-color: #fff;
+	overflow: hidden;
+	width: 1467px;
+	height: 550px;
+	border-radius: 10px;
+	margin-top:160px;
+	position: absolute;
+}
+.image{
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	position: absolute;
+	margin-left: 25px;
+}
+.options{
+	position: absolute;
+	margin-left: 150px;
+	margin-top: 34px;
+}
+.options a{
+	color: #111;
+	padding: 34px 50px;
+	font-size: 25px;
+	float: none;
+	display: inline;
+	font-style: italic;
+	text-decoration: none;
+}
+.options a:hover{
+	text-decoration: underline;
+}
+.options a:focus{
+	text-decoration: underline;
+}
+.heading{
+	font-style: bold;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+.dashcontainer{
+	position:relative;
+	top:120px;
+	margin: auto;
+	width: 960px;
+	height: 240px;
+	border: 1px solid;
+
+}
+.userlogs{
+	background-color: #D0E5EC;
+	color: #111;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	left: 252px;
+	top: 375px;
+	font-size: 17px;
+}
+.citylist{
+	background-color: #D0E5EC;
+	color: #111;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	right: 252px;
+	top: 375px;
+	font-size: 17px;
+}
+.citypopup{
+	border: 2px solid;
+	background-color: white;
+	width: 50%;
+	height: 410px;
+	bottom: 175px;
+	transform: translate(-50%,50%) scale(0.1);
+	visibility: hidden;
+	transition: transform 0.4s, top 0.4s;
+	
+}
+.title{
+	height: 45px;
+	width: 100%;
+	border: 1px solid;
+	text-align: center;
+}
+h2{
+	color: #363636;
+	margin-top: 10px;
+}
+.list{
+	position: relative;
+	margin: auto;
+	height: 275px;
+	width: 88%;
+	background-color: #D9D9D9;
+	top: 45px;
+	
+}
+.open_cities{
+	position: relative;
+	margin: 0px auto;
+	visibility: visible;
+	transform: translate(-50%,50%) scale(1);
+	left: 385px;
+	bottom: 388px;
+}
+.x{
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+	position:absolute;
+	top: 12px;
+	right: 8px;
+}
+.userpopup{
+	border: 2px solid;
+	background-color: white;
+	width: 50%;
+	height: 410px;
+	bottom: 175px;
+	transform: translate(-50%,50%) scale(0.1);
+	visibility: hidden;
+	transition: transform 0.4s, top 0.4s;
+	
+}
+.open_logs{
+	position: relative;
+	margin: 0px auto;
+	visibility: visible;
+	transform: translate(-50%,50%) scale(1);
+	left: 385px;
+	bottom: 800px;
+}
+
+.account{
+	position: absolute;
+	left: 1264px;
+	margin-top: 17px;
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+}
+.settings{
+	position: absolute;
+	margin-left: 1360px;
+	margin-top: 25px;
+	background-color: #fff;
+	border: none;
+	cursor: pointer;
+}
+.menudrop { 
+    display: inline-block; 
+    position: relative; 
+	width: 200px;
+	height:200px;
+	overflow: visible;
+	
+  } 
+.menu {
+      display: none;
+      position: absolute;
+      width: 100%;
+      overflow: visible;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  left: 1135px;
+	  top: 75px;
+	  background-color: #D9D9D9;
+	  border-radius: 10px;
+	  z-index: 10;
+  }
+.menudrop:hover .menu {
+      display: block;
+  }
+ .menu a {
+      display: block;
+      color: #000000;
+      padding: 5px;
+      text-decoration: none;
+  }
+.menu a:hover {
+      color: #FFFFFF;
+      background-color: #00A4BD;
+  }
+.query{ 
+    display: inline-block; 
+    position: relative; 
+	width: 200px;
+	height:200px;
+	overflow: visible;
+	
+  } 
+.querylist{
+      display: none;
+      position: absolute;
+      width: 100%;
+      overflow: visible;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);	  
+	  top: 45px;
+	  background-color: #D9D9D9;
+	  border-radius: 10px;
+	  z-index: 10;
+  }
+.query:hover .querylist {
+      display: block;
+  }
+ .querylist a {
+      display: block;
+      color: #000000;
+      padding: 5px;
+      text-decoration: none;
+	  font-style: normal;
+	  font-size: 17px;
+  }
+.querylist a:hover {
+      color: #FFFFFF;
+      background-color: #00A4BD;
+  }
+.gquery{
+	background-color: #fff;
+	overflow: hidden;
+	width: 1467px;
+	height: 600px;
+	border-radius: 10px;
+	margin-top:160px;
+	position: absolute;
+}
+div.tifs{
+	position:relative;
+	top:120px;
+	margin: auto;
+	width: 90%;
+	height: 70%;
+	border:2px solid #111;
+	border-radius: 0px;
+	overflow: hidden;
+}
+.gqoptions{
+	position: absolute;
+	top: 80px;
+	left: 73px;
+}
+#datetime{
+	position: absolute;
+	left: 73px;
+	bottom: 40px;
+}
+.recs{
+	position: absolute;
+	right: 130px;
+	bottom: 40px;
+}
+.xml{
+	position:relative;
+	top:120px;
+	margin: auto;
+	width: 90%;
+	height: 70%;
+	border:2px solid #111;
+	border-radius: 0px;
+}
+.upload{
+	position: absolute;
+	left: 73px;
+	bottom: 35px;
+}
+.pay{
+	position:relative;
+	top:70px;
+	left: 30px;
+	width: 50%;
+	height: 90%;
+	border-radius: 0px;
+}
+.box{
+	position:relative;
+	left: 20%;
+	padding: 14px 20px;
+	width: 300px;
+	border-radius: 5px;
+	display: block;
+}
+.label{
+	position: relative;
+	top: 33px;
+}
+.paybut{
+	background-color: #D0E5EC;
+	color: #111;
+	padding: 14px 24px;
+	border: none;
+	cursor: pointer;
+	border-radius: 8px;	
+	font-weight: 1000px;
+	position: absolute;
+	bottom: 40px;
+	left: 500px;
+}
+.cancelpay{
+	background-color: #111;
+	color: white;
+	border: none;
+	padding: 14px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 40px;
+	left: 700px;
+}
+.settingspopup{
+	border: 2px solid;
+	background-color: white;
+	width: 50%;
+	height: 410px;
+	bottom: 175px;
+	transform: translate(-50%,50%) scale(0.1);
+	visibility: hidden;
+	transition: transform 0.4s, top 0.4s;
+	
+}
+.open_settings{
+	position: relative;
+	margin:  auto;
+	visibility: visible;
+	transform: translate(-50%,50%) scale(1);
+	left: 385px;
+	bottom: 1200px;
+}
+

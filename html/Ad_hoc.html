@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/Walamoo/css/dashstyle.css">
+	</head>
+	<body>	
+		<div class="container">
+			<div class="navbar">
+				<img class="image" src="/Walamoo/images/WalaLogo.png" alt="Logo">
+				<div class="options">
+				
+					<a class="button" href="Dashboard.html">Dashboard</a>
+					<div class="query">
+						<a class="querybut" href="Login.html">Query</a>
+						<div class="querylist">
+							<a href="Guided.html">Guided</a>
+							<a href="Ad_hoc.html">Ad-hoc</a>
+						</div>
+					</div>
+					
+					<a class="button" href="#scenario">Monthly Scenario</a>
+					
+					
+						<a class="button" href="XML.html">XML</a>
+						
+					
+					
+				</div>
+				<div class="menudrop">
+					<button class="account"><img src="/Walamoo/images/account1.png" alt="Account" style="width:70px;height:70px;"></button>
+					<div class="menu">
+						<a href="paynow.html">Pay Now</a>
+						<a href="#">Bank Statement</a>
+						<a href="Login.html">Log out</a>
+					</div>
+					
+				</div>
+				
+				<button class="settings"><img src="/Walamoo/images/settings.png" alt="Settings" style="width:53px;height:53px;"></button>
+				
+			</div>
+			<div class="gquery">
+				<h1 class="heading">Query Builder</h1>
+				<form>
+				<div class="gqoptions">
+					<label for="category"><strong>List by:</strong></label>
+					<select name="category" id="category">
+					  <option value="company">Company</option>
+					  <option value="country">Country</option>
+					  <option value="city">City</option>
+					</select>
+					
+					<label for="category"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total:</strong></label>
+					<select name="category" id="category">
+					  <option value="company">Companies</option>
+					  <option value="country">Countries</option>
+					  <option value="city">Cities</option>
+					</select>
+					
+					<label for="numrecs"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records:</strong></label>
+					<input class="numrecs" name="numrecs" type="text" placeholder="Number of records">
+					
+					<label for="sort"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order:</strong></label>
+					<input type="radio" id="asc" name="sort" value="ASC">
+					<label for="asc">ASC</label>
+					<input type="radio" id="dsc" name="sort" value="DSC">
+					<label for="dsc">DSC</label>
+				</div>
+				</form>
+				<div class="tifs"></div>
+				<p id="datetime"></p>
+				<p class="recs">Records:</p>
+			</div>
+		</div>
+		<script>
+			 // create a function to update the date and time
+      function updateDateTime() {
+        // create a new `Date` object
+        const now = new Date();
+
+        // get the current date and time as a string
+        const currentDateTime = now.toLocaleString();
+
+        // update the `textContent` property of the `span` element with the `id` of `datetime`
+        document.querySelector('#datetime').textContent = currentDateTime;
+      }
+
+      // call the `updateDateTime` function every second
+      setInterval(updateDateTime, 1000);
+		</script>
+	</body>
+</html>

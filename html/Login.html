@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="/Walamoo/css/style.css">
+</head>
+<body>
+<img src="/Walamoo/images/WalaLogo.png" alt="Logo" class="logo">
+<!-- Side navigation -->
+<div class="sidenav">
+	<div class = "button-container">
+	<p class="new">New Here?</p>
+	<p class="description">The Walamoo Tax Information System <br> platform provides an easy and <br> convenient means for managing your <br> taxes. Using this system you can pay <br> your taxes on time, every time.    </p>
+    <button class="black_buttons"><strong>Register here!</strong></button>
+	<button type="submit" class="faq" onclick="popUp()"><strong>FAQ</strong></button>
+	</div>
+</div>	
+
+<div class="heading" ><p>Log in to your Account</p></div>
+<div class="login">
+	
+	<form class="login-form" action="/Walamoo/php/login.php" method="post">
+	
+            <input name="email" class="email" type="text" placeholder="E-mail Address" required>
+            <input name="password" class="password" type="password" placeholder="Password" required>
+			<span class="psw">Forgot <a href="#">password?</a></span>
+            <div class="blue_button"><button class="submit"><strong>Submit</strong></button></div>
+        </form>
+		
+	
+</div>
+<div class="popup" id="popup">
+	<img src="/Walamoo/images/WalaLogo.png">
+	<h1>FAQ</h1>
+	<h2>What is our Project?</h2>
+	<p>Our project is a tax collection system created to smoothly manage tax collection from the walamoos and pay employees.</p>
+	<h2>The Design Team</h2>
+	<p>Kaléb Lawrence <br> Christopher Mapp <br> Zaccai Small <br> Akeem Smith <br> Kayla Daniel <br> Rafael Lowe </p>
+	<button type="button"onclick="ClosePopUp()" >Ok</button>
+</div>
+
+<!-- Page content -->
+<div class="main">
+    <!-- Your main content goes here -->
+</div>
+
+<script>
+	let popup = document.getElementById("popup");
+	
+	function popUp(){
+		popup.classList.add("open_popup");
+		}
+	function ClosePopUp(){
+		popup.classList.remove("open_popup");
+	}
+	
+	
+</script>
+<?php
+	
+	if (isset($_GET['error'])) {
+        echo '<p style="color: red;">Incorrect username or password.</p>';
+?>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City-Country Associations</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>City-Country Associations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Countries</th>
+                <th>Cities</th>
+            </tr>
+        </thead>
+        <tbody id="countryCities"></tbody>
+    </table>
+
+    <script>
+        // Load XML data from a file path (replace with your actual file path)
+        fetch('path/to/your-xml-file.xml')
+            .then(response => response.text())
+            .then(xmlData => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
+                const cities = xmlDoc.querySelectorAll('city');
+
+                const countryCounts = {};
+
+                cities.forEach(city => {
+                    const cityName = city.querySelector('name').textContent;
+                    const countryName = city.querySelector('country').textContent;
+
+                    if (!countryCounts[countryName]) {
+                        countryCounts[countryName] = [];
+                    }
+                    countryCounts[countryName].push(cityName);
+                });
+
+                const countryCitiesTable = document.getElementById('countryCities');
+                Object.keys(countryCounts).forEach(countryName => {
+                    const citiesList = countryCounts[countryName].join(', ');
+                    const row = `<tr><td>${countryName}</td><td>${citiesList}</td></tr>`;
+                    countryCitiesTable.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error loading XML:', error));
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <style>
+        /* Style the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <button onclick="displayTable()">Show Employee Table</button>
+    <button onclick="sortTable('firstname')">Sort by First Name</button>
+    <button onclick="sortTable('lastname')">Sort by Last Name</button>
+    <table id="employeeTable">
+        <!-- Table will be dynamically generated here -->
+    </table>
+
+    <script>
+	
+	const xmlData = `<data>
+		<employees>
+	  <employee id="be129">
+		<firstname>Jitendra</firstname>
+		<lastname>Kumar</lastname>
+		<title>Engineer</title>
+		<division>Materials</division>
+		<building>327</building>
+		<room>19</room>
+	  </employee>
+	  <!-- Add more employee details here -->
+	</employees>
+	</data>`;
+	
+        let employeesData; // Store XML data globally
+
+        function displayTable() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    const xmlDoc = this.responseXML;
+                    employeesData = xmlDoc.getElementsByTagName("employee");
+                    generateTable();
+                }
+            };
+
+            xhttp.open("GET", "employee.xml", true);
+            xhttp.send();
+        }
+
+        function generateTable() {
+            let tableContent = "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Title</th></tr>";
+
+            for (let i = 0; i < employeesData.length; i++) {
+                const employee = employeesData[i];
+                const id = employee.getAttribute("id");
+                const firstName = employee.getElementsByTagName("firstname")[0].textContent;
+                const lastName = employee.getElementsByTagName("lastname")[0].textContent;
+                const title = employee.getElementsByTagName("title")[0].textContent;
+
+                tableContent += `<tr><td>${id}</td><td>${firstName}</td><td>${lastName}</td><td>${title}</td></tr>`;
+            }
+
+            document.getElementById("employeeTable").innerHTML = tableContent;
+        }
+
+        function sortTable(tagName) {
+            employeesData = Array.from(employeesData);
+            employeesData.sort((a, b) => {
+                const aValue = a.getElementsByTagName(tagName)[0].textContent;
+                const bValue = b.getElementsByTagName(tagName)[0].textContent;
+                return aValue.localeCompare(bValue);
+            });
+
+            generateTable();
+        }
+    </script>
+</body>
+</html>
